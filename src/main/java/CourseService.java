@@ -11,35 +11,35 @@ public class CourseService {
     private final List<Courses> courses = new ArrayList<>();
 
     public CourseService() {
+        // ===== Foundation Courses =====
+        courses.add(new Courses("MAT101", "Calculus I", "Foundation"));
+        courses.add(new Courses("MAT102", "Linear Algebra I", "Foundation"));
+        courses.add(new Courses("MAT103", "Discrete Mathematics", "Foundation"));
+        courses.add(new Courses("MAT104", "Introduction to Mathematical Proofs", "Foundation"));
 
-        courses.add(new Courses("MAT101", "Introduction to Programming", "Foundation"));
-        courses.add(new Courses("MAT102", "Computer Systems Fundamentals", "Foundation"));
+        // ===== Undergraduate Courses =====
+        courses.add(new Courses("MAT201", "Calculus II", "Undergraduate"));
+        courses.add(new Courses("MAT202", "Linear Algebra II", "Undergraduate"));
+        courses.add(new Courses("MAT203", "Probability and Statistics", "Undergraduate"));
+        courses.add(new Courses("MAT204", "Numerical Methods", "Undergraduate"));
+        courses.add(new Courses("MAT205", "Abstract Algebra", "Undergraduate"));
 
-
-        courses.add(new Courses("MAT201", "Data Structures and Algorithms", "Undergraduate"));
-        courses.add(new Courses("MAT202", "Database Systems", "Undergraduate"));
-        courses.add(new Courses("MAT203", "Operating Systems", "Undergraduate"));
-        courses.add(new Courses("MAT204", "Software Engineering", "Undergraduate"));
-        courses.add(new Courses("MAT205", "Computer Networks", "Undergraduate"));
-
-
-        courses.add(new Courses("MAT369", "Advanced Algorithms", "Honours"));
-        courses.add(new Courses("MAT370", "Artificial Intelligence", "Honours"));
-        courses.add(new Courses("MAT371", "Machine Learning", "Honours"));
-        courses.add(new Courses("MAT372", "Cloud Computing", "Honours"));
+        // ===== Honours Courses =====
+        courses.add(new Courses("MAT301", "Real Analysis", "Honours"));
+        courses.add(new Courses("MAT302", "Complex Analysis", "Honours"));
+        courses.add(new Courses("MAT303", "Topology", "Honours"));
+        courses.add(new Courses("MAT304", "Differential Geometry", "Honours"));
     }
 
-
+    // ===== CRUD Operations =====
     public Courses addCourse(Courses course) {
         courses.add(course);
         return course;
     }
 
-
     public List<Courses> getAllCourses() {
         return courses;
     }
-
 
     public Courses getCourseByCode(String code) {
         return courses.stream()
@@ -47,7 +47,6 @@ public class CourseService {
                 .findFirst()
                 .orElse(null);
     }
-
 
     public Courses updateCourse(String code, Courses updated) {
         for (Courses c : courses) {
@@ -60,11 +59,9 @@ public class CourseService {
         return null;
     }
 
-
     public boolean deleteCourse(String code) {
         return courses.removeIf(c -> c.getCode().equalsIgnoreCase(code));
     }
-
 
     public List<Courses> getByLevel(String level) {
         return courses.stream()

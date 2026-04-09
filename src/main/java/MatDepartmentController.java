@@ -14,13 +14,13 @@ public class MatDepartmentController {
     @Autowired
     private CourseService service;
 
-    // ✅ TEST
+
     @GetMapping("/test")
     public String test() {
         return "API is working!";
     }
 
-    // ✅ PART A: Department grouped courses
+
     @GetMapping("/department")
     public DepartmentCourses getDepartmentCourses() {
         return new DepartmentCourses(
@@ -65,7 +65,7 @@ public class MatDepartmentController {
         return service.updateCourse(code, course);
     }
 
-    // DELETE
+
     @DeleteMapping("/{code}")
     public String deleteCourse(@PathVariable String code) {
         boolean deleted = service.deleteCourse(code);
