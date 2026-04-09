@@ -16,15 +16,7 @@ public class DepartmentCourses {
         this.honoursCourses = honoursCourses;
     }
 
-    public List<Courses> getFoundationCourses() {
-        return foundationCourses;
-    }
-
-    public List<Courses> getUndergraduateCourses() {
-        return undergraduateCourses;
-    }
-
-    public List<Courses> getHonoursCourses() {
-        return honoursCourses;
-    }
+    public List<Courses> getFoundationCourses() { return foundationCourses; }
+    public List<Courses> getUndergraduateCourses() { return undergraduateCourses; }
+    public List<Courses> getHonoursCourses() { return honoursCourses; }
 }
