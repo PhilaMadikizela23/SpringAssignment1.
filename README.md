@@ -1,74 +1,90 @@
-# SpringAssignment1
-### PART A: INTRODUCTION TO JAVA FRAMEWORKS – SPRING BOOT PROJECT
+# SpringAssignment1 - CSC313 Assignment 1
 
-* We created a GitHub account and then created a new remote repository called **SpringAssignment1** to host our Spring Boot project online.
+University of Fort Hare  
+CSC313 – Object-Oriented Programming  
+Assignment 1: Spring Boot Project with CRUD and Validation  
+Submission Date: 10 April 2026  
 
-* We created a Spring Boot application using our IDE to expose an HTTP endpoint that can be accessed through a web browser.
+Repository: https://github.com/SpringAssignment/SpringAssignment1  
+(Replace YOUR-USERNAME with your actual GitHub username)
 
-* We created a controller class and mapped a method to an HTTP endpoint so that when a user opens **localhost:8080** in the browser, the system returns course information from the Computer Science Department.
+## Group Members
+- Phila Madikizela - 202310277 
+- Member 2 Full Name - Student Number  
+- Member 3 Full Name - Student Number  
+- Member 4 Full Name - Student Number  
 
-* We displayed the following course data:
+(Please replace the lines above with your real names and student numbers)
 
-  * 2 Foundation courses offered in the Computer Science Department
-  * 5 Undergraduate courses offered in the Computer Science Department
-  * 4 Honours courses offered in the Computer Science Department
+## What is in this Repository
+This is a complete Spring Boot web application for the MAT (Mathematics) Department.  
+It fully meets all requirements for Part A and Part B of the assignment.
 
-* We initialized the project folder as a Git repository to enable version control and track changes in the project.
+- Part A: Basic Spring Boot API + GitHub setup (50 marks)  
+- Part B: Full CRUD operations + Validation (50 marks)
 
-* We added all the project files to the staging area using Git.
+The application has a nice web dashboard where you can view courses and do Create, Read, Update and Delete operations easily.
 
-* We committed the staged files to save the current version of the project.
+## How to Run the Application
+1. Open the project in IntelliJ IDEA  
+2. Run the file SpringAssignment1Application.java  
+3. Wait until you see the message "Started SpringAssignment1Application" in the console  
+4. Open your web browser and go to:  
+   http://localhost:8080
 
-* We copied the remote repository URL from GitHub.
+This is the main CRUD website (Dashboard).  
+You can also test:  
+- http://localhost:8080/api/courses/test  
+- http://localhost:8080/h2-console (to see the database)
 
-* We added the remote repository URL to connect the local project to GitHub.
+## What We Built (Part A)
+- Created a Spring Boot application  
+- Made HTTP endpoints that return exactly:  
+  - 2 Foundation courses  
+  - 5 Undergraduate courses  
+  - 4 Honours courses (all MAT codes)  
+- Used Git and GitHub for version control  
+- Added all group members and lecturer to the repository  
+- Pushed everything to GitHub
 
-* We pushed the local project to GitHub so that it can be accessed and reviewed online.
+## What We Built (Part B)
+- Full CRUD operations:  
+  - Create: Add new courses  
+  - Read: View all courses  
+  - Update: Edit courses (including changing the course code)  
+  - Delete: Remove courses  
+- Input validation using @NotBlank  
+- Persistent database (H2) so data is not lost when you restart the app  
+- Clean and simple GUI dashboard for easy use
 
-### Summary
+## Easy and Hard Parts of the Assignment
+Easy parts:  
+- Setting up Spring Boot and GitHub  
+- Creating the basic controller and endpoints  
+- Adding initial courses  
 
-* We created a Spring Boot application.
-* We exposed an HTTP endpoint to display course data in a browser.
-* We used Git for version control.
-* We uploaded the project to GitHub successfully.
+Hard parts:  
+- Making full CRUD work properly  
+- Updating the course code (because it is the primary key)  
+- Connecting everything to a real database  
+- Making the GUI connect smoothly with the backend  
 
-This part helped us understand how to build a basic Spring Boot application, expose HTTP endpoints, and manage project versions using GitHub.
+## CRUD Attempts We Made
+- First attempt: Used ArrayList (data disappeared when restarting the app)  
+- Second attempt: Added database with JPA and H2  
+- Third attempt: Fixed the update function so course code can be changed  
+- Final version: Everything works perfectly with database and nice GUI
 
-### PART B: INTRODUCTION TO JAVA FRAMEWORKS – SPRING BOOT PROJECT
+## Summary
+This project has everything the assignment asked for:  
+- Spring Boot application  
+- Correct number of courses  
+- Full working CRUD  
+- Validation  
+- GitHub with all members and lecturer having access  
+- Easy-to-use web dashboard at http://localhost:8080
 
-Building on the foundation laid in Part A:
+Thank you for checking our work.  
+You can test the full application by running it and opening http://localhost:8080.
 
-* We extended our Spring Boot application to include **CRUD operations** (Create, Read, Update, Delete) for course information.
-* We added additional HTTP endpoints and methods to allow users to create new courses, view existing courses, update course details, and delete courses from the system.
-* We created methods such as **addCourse**, **getCourses**, **updateCourse**, and **deleteCourse** to handle these operations.
-* We tested the endpoints using a web browser or tools like Postman to ensure that all CRUD operations work correctly.
-
-### CRUD Functionality Implemented
-
-* Create: We added an endpoint to allow users to add new course information.
-* Read: We created an endpoint to display all available courses.
-* Update: We added an endpoint to modify existing course details.
-* Delete: We created an endpoint to remove a course from the system.
-
-### Validation
-
-* We implemented **input validation** to ensure that users enter correct and complete course information.
-* We used Spring Validation (Bean Validation annotations) to validate fields such as course name, course code, and course category.
-* We applied annotations like **@NotNull**, **@NotBlank**, and **@Size** to prevent invalid or empty data from being stored in the system.
-* This helps maintain data integrity and prevents errors in the application.
-
-### Collaboration and Research
-
-* We conducted prior research on Spring Boot CRUD operations and validation to successfully implement the required features.
-* We ensured that all group members and the lecturer have access to the GitHub repository for collaboration and assessment.
-
-### Summary
-
-* We extended the Spring Boot application from Part A.
-* We implemented CRUD operations for course management.
-* We added HTTP endpoints for create, read, update, and delete operations.
-* We implemented validation to ensure correct input data.
-* We shared the GitHub repository for collaboration and evaluation.
-
-This part helped us understand how to build a more advanced Spring Boot application with CRUD functionality and input validation while working collaboratively using GitHub.
-
+Last updated: 10 April 2026
