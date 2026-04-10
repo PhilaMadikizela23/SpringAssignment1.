@@ -2,266 +2,233 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mat Department Courses</title>
-
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(to right, #eef2f3, #dfe9f3);
-            margin: 0;
-            padding: 20px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: auto;
-        }
-
-        .card {
-            background: white;
-            padding: 20px;
-            margin-top: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        input {
-            padding: 10px;
-            margin: 5px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-        }
-
-        button {
-            padding: 10px 15px;
-            margin: 5px;
-            border: none;
-            border-radius: 6px;
-            background: #4CAF50;
-            color: white;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background: #45a049;
-        }
-
-        .danger {
-            background: #e74c3c;
-        }
-
-        .danger:hover {
-            background: #c0392b;
-        }
-
-        .info {
-            background: #3498db;
-        }
-
-        .info:hover {
-            background: #2980b9;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-
-        th, td {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-            text-align: left;
-        }
-
-        th {
-            background: #3498db;
-            color: white;
-        }
-
-        tr:hover {
-            background: #f1f1f1;
-        }
-
-        .header-buttons {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .section-title {
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAT Department - Course Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style> body { font-family: 'Inter', system-ui, sans-serif; } </style>
 </head>
-
-<body>
-
-<div class="container">
-
-    <h1>🎓 Mat Department Courses</h1>
-
-    <!-- TOP BUTTONS -->
-    <div class="header-buttons">
-        <button class="info" onclick="testAPI()">Test API</button>
-        <button class="info" onclick="getAllCourses()">All Courses</button>
-        <button class="info" onclick="getDepartment()">Department View</button>
+<body class="bg-gray-50">
+<div class="flex h-screen">
+    <!-- Sidebar -->
+    <div class="w-64 bg-indigo-700 text-white p-6">
+        <h1 class="text-2xl font-bold mb-8 flex items-center gap-2">
+            <i class="fas fa-university"></i> MAT Department
+        </h1>
+        <nav class="space-y-2">
+            <a href="#" onclick="showSection('dashboard')" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600">Dashboard</a>
+            <a href="#" onclick="showSection('manage')" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600">Manage Courses (CRUD)</a>
+        </nav>
     </div>
 
-    <!-- ADD -->
-    <div class="card">
-        <div class="section-title">➕ Add Course</div>
-        <input type="text" id="code" placeholder="Course Code">
-        <input type="text" id="name" placeholder="Course Name">
-        <input type="text" id="level" placeholder="Level">
-        <button onclick="addCourse()">Add</button>
-    </div>
+    <!-- Main Content -->
+    <div class="flex-1 overflow-auto">
+        <div class="p-8">
+            <!-- DASHBOARD -->
+            <div id="dashboard" class="section">
+                <h2 class="text-3xl font-bold mb-6">Mathematics Department Dashboard</h2>
+                <div class="grid grid-cols-3 gap-6">
+                    <div id="foundation-card" class="bg-white p-6 rounded-2xl shadow"></div>
+                    <div id="undergrad-card" class="bg-white p-6 rounded-2xl shadow"></div>
+                    <div id="honours-card" class="bg-white p-6 rounded-2xl shadow"></div>
+                </div>
+                <button onclick="loadAllCourses()" class="mt-8 px-6 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 flex items-center gap-2">
+                    <i class="fas fa-sync"></i> Refresh Data
+                </button>
+            </div>
 
-    <!-- UPDATE -->
-    <div class="card">
-        <div class="section-title">✏️ Update Course</div>
-        <input type="text" id="updateCode" placeholder="Course Code">
-        <input type="text" id="updateName" placeholder="New Name">
-        <input type="text" id="updateLevel" placeholder="New Level">
-        <button onclick="updateCourse()">Update</button>
-    </div>
+            <!-- MANAGE COURSES (CRUD) -->
+            <div id="manage" class="section hidden">
+                <h2 class="text-3xl font-bold mb-6">Manage Courses – Full CRUD</h2>
+                <button onclick="showAddForm()" class="mb-6 px-6 py-3 bg-green-600 text-white rounded-xl hover:bg-green-700 flex items-center gap-2">
+                    <i class="fas fa-plus"></i> Add New Course
+                </button>
 
-    <!-- DELETE -->
-    <div class="card">
-        <div class="section-title">🗑 Delete Course</div>
-        <input type="text" id="deleteCode" placeholder="Course Code">
-        <button class="danger" onclick="deleteCourse()">Delete</button>
+                <div class="bg-white rounded-2xl shadow overflow-hidden">
+                    <table class="w-full">
+                        <thead class="bg-gray-100">
+                        <tr>
+                            <th class="px-6 py-4 text-left">Code</th>
+                            <th class="px-6 py-4 text-left">Name</th>
+                            <th class="px-6 py-4 text-left">Level</th>
+                            <th class="px-6 py-4 text-center">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody id="course-table" class="divide-y"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
-    <!-- OUTPUT -->
-    <div class="card">
-        <div class="section-title">📋 Results</div>
-        <div id="output"></div>
+<!-- Modal -->
+<div id="modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-3xl p-8 w-full max-w-md">
+        <h3 id="modal-title" class="text-2xl font-semibold mb-6">Add Course</h3>
+        <form id="course-form">
+            <input type="hidden" id="edit-code">
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Course Code</label>
+                    <input id="form-code" type="text" class="w-full border rounded-xl px-4 py-3" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Course Name</label>
+                    <input id="form-name" type="text" class="w-full border rounded-xl px-4 py-3" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Level</label>
+                    <select id="form-level" class="w-full border rounded-xl px-4 py-3">
+                        <option value="Foundation">Foundation</option>
+                        <option value="Undergraduate">Undergraduate</option>
+                        <option value="Honours">Honours</option>
+                    </select>
+                </div>
+            </div>
+            <div class="flex gap-3 mt-8">
+                <button type="button" onclick="hideModal()" class="flex-1 py-3 border rounded-2xl">Cancel</button>
+                <button type="submit" class="flex-1 py-3 bg-indigo-600 text-white rounded-2xl">Save</button>
+            </div>
+        </form>
     </div>
-
 </div>
 
 <script>
-    const BASE_URL = "http://localhost:8080/api/courses";
+    const API = '/api/courses';
+    let currentCourses = [];
 
-    function testAPI() {
-        fetch(`${BASE_URL}/test`)
-            .then(res => res.text())
-            .then(data => showMessage(data));
+    async function apiCall(url, method, body = null) {
+        try {
+            const options = {
+                method: method,
+                headers: { 'Content-Type': 'application/json' }
+            };
+            if (body) options.body = JSON.stringify(body);
+
+            const res = await fetch(url, options);
+            if (!res.ok) {
+                const text = await res.text();
+                throw new Error(`HTTP ${res.status}: ${text || res.statusText}`);
+            }
+            return res.headers.get('content-type')?.includes('application/json') ? await res.json() : await res.text();
+        } catch (err) {
+            console.error(err);
+            alert("❌ ERROR: " + err.message + "\n\nCheck browser console (F12) for details.");
+            throw err;
+        }
     }
 
-    function getAllCourses() {
-        fetch(BASE_URL)
-            .then(res => res.json())
-            .then(data => showTable(data));
+    async function loadAllCourses() {
+        try {
+            const data = await apiCall(API, 'GET');
+            currentCourses = data;
+            renderDashboard();
+            renderTable();
+            console.log("✅ Courses loaded successfully");
+        } catch (e) {}
     }
 
-    function getDepartment() {
-        fetch(`${BASE_URL}/department`)
-            .then(res => res.json())
-            .then(data => {
-                let html = "<h3>Foundation</h3>" + table(data.foundationCourses);
-                html += "<h3>Undergraduate</h3>" + table(data.undergraduateCourses);
-                html += "<h3>Honours</h3>" + table(data.honoursCourses);
-                showOutput(html);
-            });
+    function renderDashboard() {
+        const f = currentCourses.filter(c => c.level === 'Foundation').length;
+        const u = currentCourses.filter(c => c.level === 'Undergraduate').length;
+        const h = currentCourses.filter(c => c.level === 'Honours').length;
+
+        document.getElementById('foundation-card').innerHTML = `<div class="text-center"><div class="text-5xl font-bold text-indigo-600">${f}</div><div class="text-gray-500">Foundation Courses</div></div>`;
+        document.getElementById('undergrad-card').innerHTML = `<div class="text-center"><div class="text-5xl font-bold text-indigo-600">${u}</div><div class="text-gray-500">Undergraduate Courses</div></div>`;
+        document.getElementById('honours-card').innerHTML = `<div class="text-center"><div class="text-5xl font-bold text-indigo-600">${h}</div><div class="text-gray-500">Honours Courses</div></div>`;
     }
 
-    function addCourse() {
-        const course = {
-            code: code.value,
-            name: name.value,
-            level: level.value
-        };
-
-        fetch(BASE_URL, {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(course)
-        })
-            .then(() => {
-                showMessage("✅ Course added!");
-                getAllCourses();
-            });
-    }
-
-    function updateCourse() {
-        const codeVal = updateCode.value;
-
-        const course = {
-            code: codeVal,
-            name: updateName.value,
-            level: updateLevel.value
-        };
-
-        fetch(`${BASE_URL}/${codeVal}`, {
-            method: "PUT",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(course)
-        })
-            .then(() => {
-                showMessage("✏️ Course updated!");
-                getAllCourses();
-            });
-    }
-
-    function deleteCourse() {
-        fetch(`${BASE_URL}/${deleteCode.value}`, {
-            method: "DELETE"
-        })
-            .then(res => res.text())
-            .then(msg => {
-                showMessage(msg);
-                getAllCourses();
-            });
-    }
-
-    // UI HELPERS
-    function showMessage(msg) {
-        showOutput(`<p>${msg}</p>`);
-    }
-
-    function showOutput(html) {
-        document.getElementById("output").innerHTML = html;
-    }
-
-    function showTable(data) {
-        showOutput(table(data));
-    }
-
-    function table(courses) {
-        let html = `
-        <table>
-            <tr>
-                <th>Code</th>
-                <th>Name</th>
-                <th>Level</th>
+    function renderTable() {
+        const tbody = document.getElementById('course-table');
+        tbody.innerHTML = currentCourses.map(c => `
+            <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4 font-mono">${c.code}</td>
+                <td class="px-6 py-4">${c.name}</td>
+                <td class="px-6 py-4">
+                    <span class="px-3 py-1 rounded-full text-xs font-medium ${c.level==='Honours'?'bg-purple-100 text-purple-700':c.level==='Undergraduate'?'bg-blue-100 text-blue-700':'bg-emerald-100 text-emerald-700'}">
+                        ${c.level}
+                    </span>
+                </td>
+                <td class="px-6 py-4 text-center space-x-4">
+                    <button onclick="editCourse('${c.code}')" class="text-blue-600 hover:text-blue-700"><i class="fas fa-edit"></i></button>
+                    <button onclick="deleteCourse('${c.code}')" class="text-red-600 hover:text-red-700"><i class="fas fa-trash"></i></button>
+                </td>
             </tr>
-        `;
+        `).join('');
+    }
 
-        courses.forEach(c => {
-            html += `
-                <tr>
-                    <td>${c.code}</td>
-                    <td>${c.name}</td>
-                    <td>${c.level}</td>
-                </tr>
-            `;
-        });
+    function showAddForm() {
+        document.getElementById('modal-title').innerHTML = '➕ Add New Course';
+        document.getElementById('edit-code').value = '';
+        document.getElementById('form-code').value = '';
+        document.getElementById('form-name').value = '';
+        document.getElementById('form-level').value = 'Foundation';
+        document.getElementById('modal').classList.remove('hidden');
+    }
 
-        html += "</table>";
-        return html;
+    async function editCourse(code) {
+        const course = currentCourses.find(c => c.code === code);
+        if (!course) return;
+        document.getElementById('modal-title').innerHTML = '✏️ Edit Course';
+        document.getElementById('edit-code').value = course.code;
+        document.getElementById('form-code').value = course.code;
+        document.getElementById('form-name').value = course.name;
+        document.getElementById('form-level').value = course.level;
+        document.getElementById('modal').classList.remove('hidden');
+    }
+
+    function hideModal() {
+        document.getElementById('modal').classList.add('hidden');
+    }
+
+    async function deleteCourse(code) {
+        if (!confirm(`Delete course ${code}?`)) return;
+        try {
+            await apiCall(`${API}/${code}`, 'DELETE');
+            alert("✅ Course deleted successfully!");
+            loadAllCourses();
+        } catch (e) {}
+    }
+
+    document.getElementById('course-form').addEventListener('submit', async e => {
+        e.preventDefault();
+        const code = document.getElementById('form-code').value.trim();
+        const name = document.getElementById('form-name').value.trim();
+        const level = document.getElementById('form-level').value;
+        const editCode = document.getElementById('edit-code').value;
+
+        if (!code || !name) {
+            alert("❌ Code and Name are required!");
+            return;
+        }
+
+        const body = { code, name, level };
+
+        try {
+            if (editCode) {
+                // UPDATE
+                await apiCall(`${API}/${editCode}`, 'PUT', body);
+                alert("✅ Course updated successfully!");
+            } else {
+                // CREATE
+                await apiCall(API, 'POST', body);
+                alert("✅ New course added successfully!");
+            }
+            hideModal();
+            loadAllCourses();
+        } catch (e) {}
+    });
+
+    // Load everything when page opens
+    window.onload = () => {
+        loadAllCourses();
+    };
+
+    function showSection(section) {
+        document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+        document.getElementById(section).classList.remove('hidden');
     }
 </script>
-
 </body>
 </html>

@@ -1,9 +1,13 @@
 package com.example.springassignment1;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+@Entity
+@Table(name = "courses")
 public class Courses {
 
+    @Id
     @NotBlank(message = "Course code is required")
     private String code;
 
