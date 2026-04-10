@@ -1,20 +1,20 @@
-# SpringAssignment1 - CSC313 Assignment 1
+# SpringAssignment - CSC313 Assignment 1
 
 University of Fort Hare  
 CSC313 – Object-Oriented Programming  
 Assignment 1: Spring Boot Project with CRUD and Validation  
 Submission Date: 10 April 2026  
 
-Repository: https://github.com/SpringAssignment/SpringAssignment1  
-(Replace YOUR-USERNAME with your actual GitHub username)
+Repository: https://github.com/PhilaMadikizela23/SpringAssignment  
+
 
 ## Group Members
 - Phila Madikizela - 202310277 
-- Member 2 Full Name - Student Number  
-- Member 3 Full Name - Student Number  
-- Member 4 Full Name - Student Number  
+- Njabulo Zondi - 224051280 
+- Elethu Mtyhaleka - 223022436  
+- Liyabona April - 202336859
+- Asandiswa Maqam - 202380924
 
-(Please replace the lines above with your real names and student numbers)
 
 ## What is in this Repository
 This is a complete Spring Boot web application for the MAT (Mathematics) Department.  
@@ -86,5 +86,3 @@ This project has everything the assignment asked for:
 
 Thank you for checking our work.  
 You can test the full application by running it and opening http://localhost:8080.
-
-Last updated: 10 April 2026
