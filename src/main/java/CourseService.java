@@ -35,7 +35,7 @@ public class CourseService {
         }
     }
 
-    // ===== FULL CRUD (now connected to real database) =====
+    // ===== FULL CRUD (now supports changing course code) =====
     public Courses addCourse(Courses course) {
         return repository.save(course);
     }
@@ -48,12 +48,28 @@ public class CourseService {
         return repository.findById(code).orElse(null);
     }
 
-    public Courses updateCourse(String code, Courses updated) {
-        return repository.findById(code).map(course -> {
-            course.setName(updated.getName());
-            course.setLevel(updated.getLevel());
-            return repository.save(course);
-        }).orElse(null);
+    // 🔥 FIXED: Now allows updating the course code itself
+    public Courses updateCourse(String oldCode, Courses updated) {
+        String newCode = updated.getCode();
+
+        // Case 1: User is NOT changing the code → simple update
+        if (oldCode.equalsIgnoreCase(newCode)) {
+            return repository.findById(oldCode).map(course -> {
+                course.setName(updated.getName());
+                course.setLevel(updated.getLevel());
+                return repository.save(course);
+            }).orElse(null);
+        }
+
+        // Case 2: User IS changing the code → delete old record and create new one
+        if (repository.existsById(oldCode)) {
+            repository.deleteById(oldCode);
+
+            // Save the course with the NEW code
+            Courses newCourse = new Courses(newCode, updated.getName(), updated.getLevel());
+            return repository.save(newCourse);
+        }
+        return null;
     }
 
     public boolean deleteCourse(String code) {
