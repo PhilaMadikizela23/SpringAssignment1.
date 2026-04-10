@@ -5,11 +5,11 @@ CSC313 – Object-Oriented Programming
 Assignment 1: Spring Boot Project with CRUD and Validation  
 Submission Date: 10 April 2026  
 
-Repository: https://github.com/YOUR-USERNAME/SpringAssignment1  
+Repository: https://github.com/SpringAssignment/SpringAssignment1  
 (Replace YOUR-USERNAME with your actual GitHub username)
 
 ## Group Members
-- Member 1 Full Name - Student Number  
+- Phila Madikizela - 202310277 
 - Member 2 Full Name - Student Number  
 - Member 3 Full Name - Student Number  
 - Member 4 Full Name - Student Number  
