@@ -9,7 +9,7 @@ Repository: https://github.com/PhilaMadikizela23/SpringAssignment
 
 
 ## Group Members
-- Phila Madikizela - 202310277 
+- Phila Madikizela - 202310277
 - Njabulo Zondi - 224051280 
 - Elethu Mtyhaleka - 223022436  
 - Liyabona April - 202336859
